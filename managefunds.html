@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manage Donations</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Charity Fundraiser</h1>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="aboutus.html">About Us</a></li>
+          <li><a href="managefunds.html">Manage Funds</a></li>
+          <li><a href="analytics.html">Analytics</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="impact">
+    <div class="container">
+      <h2>Manage Donations (CRUD)</h2>
+      <form id="donationForm">
+        <input type="text" id="donorName" placeholder="Donor Name" required />
+        <input type="number" id="donationAmount" placeholder="Amount ($)" required />
+        <button type="submit">Add Donation</button>
+      </form>
+      <table>
+        <thead>
+          <tr>
+            <th>Donor</th>
+            <th>Amount</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="donationList"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>Charity Fundraiser | Built by Akhil</p>
+    </div>
+  </footer>
+
+  <script>
+    const form = document.getElementById('donationForm');
+    const list = document.getElementById('donationList');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const name = document.getElementById('donorName').value;
+      const amount = document.getElementById('donationAmount').value;
+
+      const row = document.createElement('tr');
+
+      const nameCell = document.createElement('td');
+      nameCell.textContent = name;
+      nameCell.contentEditable = false;
+
+      const amountCell = document.createElement('td');
+      amountCell.textContent = `$${amount}`;
+      amountCell.contentEditable = false;
+
+      const actionCell = document.createElement('td');
+      const editButton = document.createElement('button');
+      editButton.textContent = 'Edit';
+      editButton.onclick = function () {
+        const isEditing = editButton.textContent === 'Save';
+        nameCell.contentEditable = !isEditing;
+        amountCell.contentEditable = !isEditing;
+        editButton.textContent = isEditing ? 'Edit' : 'Save';
+      };
+
+      const deleteButton = document.createElement('button');
+      deleteButton.textContent = 'Delete';
+      deleteButton.onclick = function () {
+        row.remove();
+      };
+
+      actionCell.appendChild(editButton);
+      actionCell.appendChild(deleteButton);
+
+      row.appendChild(nameCell);
+      row.appendChild(amountCell);
+      row.appendChild(actionCell);
+      list.appendChild(row);
+
+      form.reset();
+    });
+  </script>
+</body>
+</html>

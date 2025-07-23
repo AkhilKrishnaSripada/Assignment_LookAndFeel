@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Donation Analytics</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Charity Fundraiser</h1>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="aboutus.html">About Us</a></li>
+          <li><a href="managefunds.html">Manage Funds</a></li>
+          <li><a href="analytics.html">Analytics</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="impact">
+    <div class="container">
+      <h2>Donation Analytics</h2>
+      <canvas id="donationChart" height="100"></canvas>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p> Charity Fundraiser | Built by Akhil</p>
+    </div>
+  </footer>
+
+  <script>
+    const ctx = document.getElementById('donationChart').getContext('2d');
+    const donationChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Education', 'Healthcare', 'Disaster Relief', 'Food', 'Others'],
+        datasets: [{
+          label: 'Funds Raised ($)',
+          data: [750, 900, 300, 600, 250],
+          backgroundColor: ['#2a9d8f', '#e76f51', '#f4a261', '#264653', '#e9c46a']
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: true },
+          title: { display: true, text: 'Donations by Category' }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
